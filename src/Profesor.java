@@ -39,7 +39,7 @@ public class Profesor extends Persona {
         return true;
     }
 
-    // Método para ampliar arreglo (dobla la capacidad actual)
+
     private static void ampliarArreglo() {
         Profesor[] nuevoArreglo = new Profesor[listaProfesores.length * 2];
         System.arraycopy(listaProfesores, 0, nuevoArreglo, 0, listaProfesores.length);
@@ -75,7 +75,7 @@ public class Profesor extends Persona {
         return false;
     }
 
-    // Método para cargar datos desde la BD al TDA
+
     public static void cargarDesdeBD(ProfesorDAO dao) {
         reiniciarArreglo();
         for (Profesor p : dao.listarProfesores()) {
@@ -83,11 +83,11 @@ public class Profesor extends Persona {
         }
     }
 
-    // Método para guardar todo el TDA en la BD (solo los que no existan)
+
     public static void guardarTodoEnBD(ProfesorDAO dao) {
         for (int i = 0; i < contador; i++) {
             Profesor p = listaProfesores[i];
-            if (!dao.existeProfesorEnBD(p)) {  // Suponemos que este método está en el DAO
+            if (!dao.existeProfesorEnBD(p)) {
                 dao.insertarProfesor(p);
             }
         }

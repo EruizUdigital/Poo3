@@ -2,9 +2,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         ProfesorDAO dao = new ProfesorDAO();
-        Scanner scanner = new Scanner(System.in);
+
 
         // --- Cargar profesores desde la BD al arreglo TDA ---
         List<Profesor> profesoresBD = dao.listarProfesores();
@@ -35,11 +36,12 @@ public class Main {
             System.out.println("4. Eliminar profesor");
             System.out.println("5. Salir");
             System.out.println("6. Buscar profesor");
-            System.out.print("Seleccione una opción: ");
+
 
             boolean continuar = false;
 
             while(!continuar) {
+                System.out.print("Seleccione una opción: ");
                 String entrada = scanner.nextLine();
                 try {
                     opcion = Integer.parseInt(entrada);
@@ -60,7 +62,7 @@ public class Main {
                     break;
 
                 case 2:
-                    Profesor nuevo = leerDatosProfesor(scanner);
+                    Profesor nuevo = leerDatosProfesor();
 
                     // Validar duplicado en TDA
                     if (Profesor.existeProfesor(nuevo)) {
@@ -90,7 +92,7 @@ public class Main {
                     System.out.print("Ingrese el ID del profesor a actualizar: ");
                     int idActualizar = scanner.nextInt();
                     scanner.nextLine(); // limpiar buffer
-                    Profesor actualizadoMenu = leerDatosProfesor(scanner);
+                    Profesor actualizadoMenu = leerDatosProfesor();
                     if (dao.actualizarProfesor(idActualizar, actualizadoMenu)) {
                         System.out.println("Profesor actualizado.");
                     } else {
@@ -118,11 +120,11 @@ public class Main {
                     int tipoBusqueda = -1;
                     boolean continuarBuscar = false;
 
-                    while(!continuar) {
+                    while(!continuarBuscar) {
                         String buscar = scanner.nextLine();
                         try {
                             tipoBusqueda = Integer.parseInt(buscar);
-                            continuar = true;
+                            continuarBuscar = true;
                         } catch (NumberFormatException e) {
                             System.out.println("Por favor, ingrese un número válido.");
                         }
@@ -167,7 +169,7 @@ public class Main {
         scanner.close();
     }
 
-    public static Profesor leerDatosProfesor(Scanner scanner) {
+    public static Profesor leerDatosProfesor( ) {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
 
@@ -180,12 +182,9 @@ public class Main {
         System.out.print("Género: ");
         String genero = scanner.nextLine();
 
-        System.out.print("Estatura (en metros): ");
-        double estatura = scanner.nextDouble();
+        double estatura = esNumeroDouble("Estatura (en metros): ");
 
-        System.out.print("Peso (en kg): ");
-        double peso = scanner.nextDouble();
-        scanner.nextLine(); // limpiar buffer
+        double peso = esNumeroDouble("Peso (en kg): ");
 
         System.out.print("Especialidad: ");
         String especialidad = scanner.nextLine();
@@ -196,4 +195,27 @@ public class Main {
 
         return new Profesor(nombre, apellido, fecha, genero, estatura, peso, especialidad, anios);
     }
+    public static double esNumeroDouble(String texto){
+        boolean validador= false;
+        String valorIngresado = "";
+        double numeroReturn = 0.0;
+
+        System.out.print(texto);
+
+        while(!validador) {
+            valorIngresado =  scanner.nextLine();
+
+            try{
+                numeroReturn = Double.parseDouble(valorIngresado);
+                validador= true;
+
+            }catch (NumberFormatException e) {
+                System.out.println("Por favor, ingrese un número válido.");
+            }
+
+        }
+
+        return numeroReturn;
+}
+
 }

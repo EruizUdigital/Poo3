@@ -109,7 +109,7 @@ public class ProfesorDAO {
                 Profesor p = new Profesor(
                         rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getString("fecha_nacimiento"),
+                        rs.getString("fechaNacimiento"),
                         rs.getString("genero"),
                         rs.getDouble("estatura"),
                         rs.getDouble("peso"),
@@ -138,7 +138,7 @@ public class ProfesorDAO {
                 Profesor p = new Profesor(
                         rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getString("fecha_nacimiento"),
+                        rs.getString("fechaNacimiento"),
                         rs.getString("genero"),
                         rs.getDouble("estatura"),
                         rs.getDouble("peso"),
@@ -167,7 +167,7 @@ public class ProfesorDAO {
                 Profesor p = new Profesor(
                         rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getString("fecha_nacimiento"),
+                        rs.getString("fechaNacimiento"),
                         rs.getString("genero"),
                         rs.getDouble("estatura"),
                         rs.getDouble("peso"),
