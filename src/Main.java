@@ -26,7 +26,7 @@ public class Main {
         }
 
         // Menú interactivo
-        int opcion;
+        int opcion = -1;
         do {
             System.out.println("\n--- MENÚ INTERACTIVO ---");
             System.out.println("1. Listar profesores");
@@ -36,8 +36,19 @@ public class Main {
             System.out.println("5. Salir");
             System.out.println("6. Buscar profesor");
             System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
+
+            boolean continuar = false;
+
+            while(!continuar) {
+                String entrada = scanner.nextLine();
+                try {
+                    opcion = Integer.parseInt(entrada);
+                    continuar = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, ingrese un número válido.");
+                }
+            }
+
 
             switch (opcion) {
                 case 1:
@@ -104,8 +115,18 @@ public class Main {
 
                 case 6:
                     System.out.println("Buscar por: 1. Nombre  2. Apellido  3. Especialidad");
-                    int tipoBusqueda = scanner.nextInt();
-                    scanner.nextLine(); // limpiar buffer
+                    int tipoBusqueda = -1;
+                    boolean continuarBuscar = false;
+
+                    while(!continuar) {
+                        String buscar = scanner.nextLine();
+                        try {
+                            tipoBusqueda = Integer.parseInt(buscar);
+                            continuar = true;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Por favor, ingrese un número válido.");
+                        }
+                    }
 
                     System.out.print("Ingrese valor de búsqueda: ");
                     String criterio = scanner.nextLine();
