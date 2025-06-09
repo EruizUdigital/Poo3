@@ -204,5 +204,21 @@ public class ProfesorDAO {
         return false;
     }
 
+    public int obtenerIdPorDatos(String nombre, String apellido, String fechaNacimiento) {
+        String sql = "SELECT id FROM Profesores WHERE nombre=? AND apellido=? AND fechaNacimiento=?";
+        try (Connection conn = conexionSqlServer.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombre);
+            stmt.setString(2, apellido);
+            stmt.setString(3, fechaNacimiento);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener id: " + e.getMessage());
+        }
+        return -1; // No encontrado
+    }
 
 }

@@ -121,4 +121,48 @@ public class Profesor extends Persona {
         System.out.println("Profesor: " + getNombre() + " " + getApellido());
         System.out.println("Especialidad: " + especialidad + ", Años de experiencia: " + aniosExperiencia);
     }
+
+ // Listar todos los profesores del TDA
+ public static java.util.List<Profesor> listarProfesoresTDA() {
+     java.util.List<Profesor> lista = new java.util.ArrayList<>();
+     for (int i = 0; i < contador; i++) {
+         lista.add(listaProfesores[i]);
+     }
+     return lista;
+ }
+
+ // Actualizar profesor en el TDA por nombre, apellido y fecha de nacimiento
+ public static boolean actualizarProfesorTDA(String nombre, String apellido, String fechaNacimiento, Profesor nuevo) {
+     for (int i = 0; i < contador; i++) {
+         Profesor p = listaProfesores[i];
+         if (p.getNombre().equalsIgnoreCase(nombre)
+                 && p.getApellido().equalsIgnoreCase(apellido)
+                 && p.getFechaNacimiento().equals(fechaNacimiento)) {
+             listaProfesores[i] = nuevo;
+             return true;
+         }
+     }
+     return false;
+ }
+
+ // Eliminar profesor en el TDA por nombre, apellido y fecha de nacimiento
+ public static boolean eliminarProfesorTDA(String nombre, String apellido, String fechaNacimiento) {
+     for (int i = 0; i < contador; i++) {
+         Profesor p = listaProfesores[i];
+         if (p.getNombre().equalsIgnoreCase(nombre)
+                 && p.getApellido().equalsIgnoreCase(apellido)
+                 && p.getFechaNacimiento().equals(fechaNacimiento)) {
+             for (int j = i; j < contador - 1; j++) {
+                 listaProfesores[j] = listaProfesores[j + 1];
+             }
+             listaProfesores[--contador] = null;
+             return true;
+         }
+     }
+     return false;
+ }
+
+
 }
+
+
